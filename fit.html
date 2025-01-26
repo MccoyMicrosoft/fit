@@ -30,6 +30,24 @@
         .exercise h3 {
             margin-top: 0;
         }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .nav-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .nav-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -81,8 +99,13 @@
             ]
         };
 
-        function showRoutine() {
-            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        const days = Object.keys(routines);
+        let currentDayIndex = new Date().getDay() - 1;
+        if (currentDayIndex < 0) currentDayIndex = 6; // Handle Sunday as last day of the week
+
+        function showRoutine(dayIndex) {
+            currentDayIndex = dayIndex;
+            const today = days[dayIndex];
             const routine = routines[today] || [];
 
             document.getElementById("day").innerText = today;
@@ -95,15 +118,26 @@
                 exerciseDiv.innerHTML = `<h3>${exercise.name}</h3><p>${exercise.description}</p>`;
                 routineContainer.appendChild(exerciseDiv);
             });
+
+            document.getElementById("prev").disabled = dayIndex === 0;
+            document.getElementById("next").disabled = dayIndex === days.length - 1;
         }
 
-        document.addEventListener("DOMContentLoaded", showRoutine);
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("prev").addEventListener("click", () => showRoutine(currentDayIndex - 1));
+            document.getElementById("next").addEventListener("click", () => showRoutine(currentDayIndex + 1));
+            showRoutine(currentDayIndex);
+        });
     </script>
 </head>
 <body>
     <div class="container">
         <h1>Daily Workout Plan</h1>
-        <h2 id="day"></h2>
+        <div class="navigation">
+            <button id="prev" class="nav-button">&#8592; Previous</button>
+            <h2 id="day"></h2>
+            <button id="next" class="nav-button">Next &#8594;</button>
+        </div>
         <div id="routine"></div>
     </div>
     <footer>
