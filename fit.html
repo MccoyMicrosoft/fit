@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Workout Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .exercise {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .exercise h3 {
+            margin-top: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+    <script>
+        const routines = {
+            Monday: [
+                { name: "Jump Squats", description: "Stand with feet shoulder-width apart. Lower into a squat, then jump up explosively and land softly back into a squat position." },
+                { name: "Lateral Bounds", description: "Jump side to side, landing softly on one foot, then push off to the opposite side." },
+                { name: "Burpees", description: "Start standing, drop into a squat with hands on the floor, kick your feet back into a plank, return to squat, and jump up." },
+                { name: "Mountain Climbers", description: "In a plank position, alternate driving your knees toward your chest as quickly as possible." }
+            ],
+            Tuesday: [
+                { name: "Agility Ladder Drills", description: "Run or step quickly through an imaginary ladder, focusing on precise foot placement." },
+                { name: "Skater Hops", description: "Jump laterally from one foot to the other, mimicking a skating motion." },
+                { name: "Fast Feet in Place", description: "Stand with knees slightly bent and quickly alternate lifting your feet off the ground." },
+                { name: "Single-Leg Balance Hops", description: "Hop forward on one foot, land softly, and switch to the other foot." }
+            ],
+            Wednesday: [
+                { name: "Plank", description: "Hold your body in a straight line from head to heels, resting on your forearms or hands." },
+                { name: "Russian Twists", description: "Sit with knees bent, lean back slightly, and twist your torso side to side." },
+                { name: "Glute Bridges", description: "Lie on your back, knees bent, feet flat. Lift your hips toward the ceiling, squeezing your glutes." },
+                { name: "Bird-Dogs", description: "On all fours, extend one arm and the opposite leg, hold briefly, and switch." }
+            ],
+            Thursday: [
+                { name: "High Knees", description: "Run in place, driving your knees up toward your chest as high as possible." },
+                { name: "Butt Kickers", description: "Run in place, kicking your heels up to touch your glutes." },
+                { name: "Squat Jumps", description: "Lower into a squat, then jump up explosively and land softly back into a squat." },
+                { name: "Burpee Variations", description: "Perform a burpee without the push-up or jump, if preferred." }
+            ],
+            Friday: [
+                { name: "Push-Ups", description: "Lower your chest to the ground while keeping your body straight, then push back up." },
+                { name: "Reverse Lunges", description: "Step one foot back into a lunge, then return to standing. Alternate legs." },
+                { name: "Side Plank Dips", description: "Hold a side plank, lowering and lifting your hips." },
+                { name: "Squat Holds", description: "Lower into a squat and hold the position for time." }
+            ],
+            Saturday: [
+                { name: "Sprint in Place", description: "Run in place as fast as possible, pumping your arms." },
+                { name: "Broad Jumps", description: "Jump forward as far as possible, landing softly on both feet." }
+            ],
+            Sunday: [
+                { name: "Cat-Cow Stretches", description: "On all fours, alternate arching and rounding your back." },
+                { name: "Hip Flexor Stretch", description: "Kneel on one knee, push your hips forward, and stretch the opposite hip." },
+                { name: "Shoulder Rolls", description: "Roll your shoulders forward and backward to loosen tension." },
+                { name: "Seated Forward Fold", description: "Sit with legs extended and reach toward your toes." }
+            ]
+        };
+
+        function showRoutine() {
+            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const routine = routines[today] || [];
+
+            document.getElementById("day").innerText = today;
+            const routineContainer = document.getElementById("routine");
+            routineContainer.innerHTML = "";
+
+            routine.forEach(exercise => {
+                const exerciseDiv = document.createElement("div");
+                exerciseDiv.className = "exercise";
+                exerciseDiv.innerHTML = `<h3>${exercise.name}</h3><p>${exercise.description}</p>`;
+                routineContainer.appendChild(exerciseDiv);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", showRoutine);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Workout Plan</h1>
+        <h2 id="day"></h2>
+        <div id="routine"></div>
+    </div>
+    <footer>
+        Stay consistent and push your limits safely!
+    </footer>
+</body>
+</html>
